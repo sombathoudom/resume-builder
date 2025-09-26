@@ -1,42 +1,68 @@
-import { createBrowserRouter } from "react-router-dom";
-import App from "../App";
-import Landing from "@/pages/Landing";
-import Login from "@/pages/Auth/Login";
+import App from "@/App";
+import { useAuth } from "@/contexts/authContext";
+import { ROUTE_PATH } from "@/lib/route-path";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PublicLayout from "@/layouts/PublicLayout";
-// import Home from "../pages/Home";
-// import About from "../pages/About";
-// import NotFound from "../pages/NotFound";
+import LandingPage from "@/pages/Landing";
+import Login from "@/pages/Auth/Login";
+import Register from "@/pages/Auth/Register";
+import PrivateLayout from "@/layouts/PrivateLayout";
+import Dashboard from "@/pages/Dashboard";
+import AdminDashboard from "@/pages/Admin/Dashboard";
+import NotFound from "@/pages/NotFound";
 
-const router = createBrowserRouter([
+export default function AppRouter() {
+  const { isAuthenticated, userRole } = useAuth();
+
+  const router = createBrowserRouter([
     {
-      path: "/",
+      path: ROUTE_PATH.root,
       element: <App />,
       children: [
-        // Public routes
+        // Public
         {
-          element: <PublicLayout/>,
+          element: <PublicLayout />,
           children: [
-            { path: "/", element: <Landing /> },
-            { path: "/login", element: <Login /> },
+            { path: ROUTE_PATH.root, element: <LandingPage /> },
+            { path: ROUTE_PATH.login, element: <Login /> },
+            { path: ROUTE_PATH.register, element: <Register /> },
           ],
         },
-  
-        // Private routes
-        // {
-        //   element: <PrivateRoute isAuthenticated={isAuthenticated} userRole={userRole} />,
-        //   children: [
-        //     { path: "/dashboard", element: <Dashboard /> },
-        //     {
-        //       path: "/admin",
-        //       element: <PrivateRoute isAuthenticated={isAuthenticated} requiredRole="admin" userRole={userRole} />,
-        //       children: [{ path: "", element: <AdminPanel /> }],
-        //     },
-        //   ],
-        // },
-  
-        // { path: "*", element: <NotFound /> }, // 404 page
+
+        // Private User
+        {
+          element: (
+            <PrivateLayout
+              isAuthenticated={isAuthenticated}
+              requiredRole="user"
+              userRole={userRole}
+            />
+          ),
+          children: [
+            { path: ROUTE_PATH.dashboard.root, element: <Dashboard /> },
+          ],
+        },
+
+        // Private Admin
+        {
+          element: (
+            <PrivateLayout
+              isAuthenticated={isAuthenticated}
+              requiredRole="admin"
+              userRole={userRole}
+            />
+          ),
+          children: [
+            {
+              path: ROUTE_PATH.adminDashboard.root,
+              element: <AdminDashboard />,
+            },
+          ],
+        },
+
+        { path: "*", element: <NotFound /> },
       ],
     },
   ]);
-
-export default router;
+  return <RouterProvider router={router} />;
+}

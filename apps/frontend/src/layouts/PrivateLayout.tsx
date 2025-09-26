@@ -1,32 +1,47 @@
-import { Outlet, Link, useNavigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+import UserNav from "@/components/ui/user-nav";
+import AdminNav from "@/components/ui/admin-nav";
 
-export default function PrivateLayout({ user }) {
-  const navigate = useNavigate();
+interface PrivateLayoutProps {
+  isAuthenticated: boolean;
+  requiredRole: string;
+  userRole: string;
+}
 
-  const handleLogout = () => {
-    // Add your logout logic here (clear auth state / tokens)
-    console.log("Logout");
-    navigate("/login");
-  };
+export default function PrivateLayout({
+  isAuthenticated,
+  requiredRole,
+  userRole,
+}: PrivateLayoutProps) {
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (requiredRole && userRole !== requiredRole) {
+    return <Navigate to="/dashboard" replace />;
+  }
 
   return (
-    <div>
-      {/* Example: Private Navbar */}
-      <nav className="padding: 10px; border-bottom: 1px solid #ccc;">
-        <Link to="/dashboard">Dashboard</Link> | 
-        {user.role === "admin" && <Link to="/admin">Admin Panel</Link>} | 
-        <button onClick={handleLogout}>Logout</button>
-      </nav>
-
-      {/* Page content */}
-      <main style={{ padding: "20px" }}>
-        <Outlet /> {/* Nested private route renders here */}
+    <div className="flex min-h-screen">
+      <aside className="w-64 bg-white dark:bg-background-dark/50 flex-shrink-0 border-r border-border-light dark:border-border-dark">
+        <div className="p-6">
+          <div className="flex items-center gap-3">
+            <div
+              className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+              style={{
+                backgroundImage: 'url("https://example.com/avatar.png")',
+              }}
+            ></div>
+            <h1 className="text-base font-medium">Sophia Carter</h1>
+          </div>
+        </div>
+        <nav className="mt-8 px-4">
+          {userRole === "admin" ? <AdminNav /> : <UserNav />}
+        </nav>
+      </aside>
+      <main className="flex-1 p-8">
+        <Outlet />
       </main>
-
-      {/* Optional Footer */}
-      <footer style={{ marginTop: "50px", textAlign: "center" }}>
-        &copy; 2025 MyApp - Logged in as {user.name}
-      </footer>
     </div>
   );
 }
