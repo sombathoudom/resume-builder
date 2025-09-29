@@ -12,8 +12,19 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Facebook, Eye, EyeOff } from "lucide-react";
+import { useAuth } from "@/contexts/authContext";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [userRole, setUserRole] = useState<"user" | "admin">("user");
+  const { login } = useAuth();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Login - Attempting to login as:", userRole);
+    login(userRole);
+    console.log("Login - Login function called");
+  };
+
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4">
       <div className="w-full max-w-lg mx-auto">
@@ -25,7 +36,22 @@ const Login = () => {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
+              <div className="space-y-2">
+                <Label htmlFor="role">Login as</Label>
+                <select
+                  id="role"
+                  value={userRole}
+                  onChange={(e) =>
+                    setUserRole(e.target.value as "user" | "admin")
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                >
+                  <option value="user">User</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input

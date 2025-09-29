@@ -6,9 +6,9 @@ export const ROUTE_PATH = {
 
   // Private routes
   dashboard: {
-    root: "/dashboard",
-    myCvs: "/dashboard/my-cvs",
-    newCv: "/dashboard/new-cv",
+    root: "/user/dashboard",
+    myCvs: "/user/dashboard/my-cvs",
+    newCv: "/user/dashboard/new-cv",
   },
 
   // Admin routes
