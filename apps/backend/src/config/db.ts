@@ -1,5 +1,8 @@
 // apps/backend/src/config/db.ts
-import { PrismaClient } from "@prisma/client";
+// NOTE: The Prisma client is generated to `src/generated/prisma` via the
+// `output` setting in prisma/schema.prisma, so we must import from there
+// instead of `@prisma/client`.
+import { PrismaClient } from "../generated/prisma";
 
 const prisma = new PrismaClient();
 

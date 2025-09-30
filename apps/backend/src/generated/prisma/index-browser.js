@@ -162,6 +162,14 @@ exports.Prisma.SubscriptionScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -201,7 +209,8 @@ exports.Prisma.ModelName = {
   User: 'User',
   CV: 'CV',
   Template: 'Template',
-  Subscription: 'Subscription'
+  Subscription: 'Subscription',
+  Category: 'Category'
 };
 
 /**

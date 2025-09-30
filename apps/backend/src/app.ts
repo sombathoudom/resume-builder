@@ -8,7 +8,7 @@ import morgan from "morgan";
 // import cvRoutes from "./routes/cv.routes";
 // import templateRoutes from "./routes/template.routes";
 import { errorHandler } from "./middlewares/error.middleware";
-
+import categoryRoutes from "./routes/category.routes";
 const app = express();
 
 // Security Middlewares
@@ -29,7 +29,7 @@ app.use("/api/", apiLimiter);
 // app.use("/api/auth", authRoutes);
 // app.use("/api/cv", cvRoutes);
 // app.use("/api/templates", templateRoutes);
-
+app.use("/api/category", categoryRoutes);
 // Error handler
 app.use(errorHandler);
 

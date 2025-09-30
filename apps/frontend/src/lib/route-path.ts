@@ -8,6 +8,7 @@ export const ROUTE_PATH = {
   dashboard: {
     root: "/user/dashboard",
     myCvs: "/user/dashboard/my-cvs",
+    templates: "/user/dashboard/templates",
     newCv: "/user/dashboard/new-cv",
   },
 
@@ -15,6 +16,7 @@ export const ROUTE_PATH = {
   adminDashboard: {
     root: "/admin/dashboard",
     categories: "/admin/categories",
+    categoryAdd: "/admin/categories/add",
     templates: "/admin/templates",
     users: "/admin/users",
     subscriptions: "/admin/subscriptions",

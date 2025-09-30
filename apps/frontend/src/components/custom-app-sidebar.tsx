@@ -23,53 +23,16 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { useAuth } from "@/contexts/authContext";
-
+import { adminAsideConfig, userAsideConfig } from "@/lib/aside-config";
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { userRole, logout } = useAuth();
   const navigate = useNavigate();
 
   const getNavMainItems = () => {
     if (userRole === "admin") {
-      return [
-        {
-          title: "Dashboard",
-          url: "/admin/dashboard",
-          icon: IconDashboard,
-        },
-        {
-          title: "Users",
-          url: "/admin/users",
-          icon: IconUsers,
-        },
-        {
-          title: "Templates",
-          url: "/admin/templates",
-          icon: IconFileDescription,
-        },
-        {
-          title: "Analytics",
-          url: "/admin/analytics",
-          icon: IconChartBar,
-        },
-      ];
+      return adminAsideConfig;
     } else {
-      return [
-        {
-          title: "Dashboard",
-          url: "/user/dashboard",
-          icon: IconDashboard,
-        },
-        {
-          title: "My CVs",
-          url: "/user/my-cvs",
-          icon: IconFileDescription,
-        },
-        {
-          title: "Templates",
-          url: "/user/templates",
-          icon: IconFolder,
-        },
-      ];
+      return userAsideConfig;
     }
   };
 

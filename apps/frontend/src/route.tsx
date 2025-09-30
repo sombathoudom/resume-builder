@@ -1,6 +1,8 @@
 import Dashboard from "@/pages/User/Dashboard";
 import AdminDashboard from "@/pages/Admin/Dashboard";
 import { ROUTE_PATH } from "@/lib/route-path";
+import Categories from "@/pages/Admin/Category";
+import CreateCategoryPage from "./pages/Admin/Category/Create";
 export const UserRoutes = [
   {
     path: "/dashboard",
@@ -15,4 +17,29 @@ export const SuperAdminRoutes = [
     ele: <AdminDashboard />,
     role: "admin",
   },
+  {
+    path: "/categories",
+    ele: <Categories />,
+    role: "admin",
+  },
+  {
+    path: "/categories/add",
+    ele: <CreateCategoryPage />,
+    role: "admin",
+  },
+  // {
+  //   path: "/templates",
+  //   ele: <Templates />,
+  //   role: "admin",
+  // },
+  // {
+  //   path: "/users",
+  //   ele: <Users />,
+  //   role: "admin",
+  // },
+  // {
+  //   path: "/subscriptions",
+  //   ele: <Subscriptions />,
+  //   role: "admin",
+  // },
 ];
