@@ -1,5 +1,48 @@
-import axios from "axios";
+import axios, {
+  AxiosError,
+  AxiosInstance,
+  InternalAxiosRequestConfig,
+  AxiosResponse,
+  HttpStatusCode,
+} from "axios";
 
-export const axiosInstance = axios.create({
-  baseURL: apiUrl.category.root,
+export interface ApiErrorResponse {
+  status_code: number;
+  message: string;
+}
+
+export class ApiError extends Error {
+  statusCode: number;
+  response: ApiErrorResponse;
+
+  constructor(response: ApiErrorResponse) {
+    super(response.message);
+    this.name = "ApiError";
+    this.statusCode = response.status_code;
+    this.response = response;
+  }
+}
+
+const axiosInstance: AxiosInstance = axios.create({
+  baseURL: process.env.API_URL,
 });
+
+axiosInstance.interceptors.request.use(
+  (config: InternalAxiosRequestConfig) => {
+    return config;
+  },
+  (error: AxiosError) => {
+    return Promise.reject(error);
+  }
+);
+
+axiosInstance.interceptors.response.use(
+  (response: AxiosResponse) => {
+    return response.data;
+  },
+  (error: AxiosError) => {
+    return Promise.reject(error);
+  }
+);
+
+export default axiosInstance;

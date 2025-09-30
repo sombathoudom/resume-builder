@@ -1,11 +1,8 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-// import { apiUrl } from "../constants";
-// import { axiosInstance } from "../lib/axios";
+import axiosInstance from "../lib/axios";
+import { ROUTE_API } from "../lib/route-api";
 
-// export const useCreateCategory = () => {
-//   return useMutation({
-//     mutationFn: (data: any) => axiosInstance.post(apiUrl.category.create, data),
-//   });
-// };
+export const useCreateCategory = async (data: ICategory.CreateCategory) => {
+  return await axiosInstance.post(ROUTE_API.category.create, data);
+};
 
 // export const useGetCategories = () => {
