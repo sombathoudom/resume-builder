@@ -24,7 +24,7 @@ export class ApiError extends Error {
 }
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: process.env.API_URL,
+  baseURL: "http://localhost:5000/api",
 });
 
 axiosInstance.interceptors.request.use(

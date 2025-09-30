@@ -17,6 +17,7 @@ export const ROUTE_PATH = {
     root: "/admin/dashboard",
     categories: "/admin/categories",
     categoryAdd: "/admin/categories/add",
+    categoryEdit: "/admin/categories/:id/edit",
     templates: "/admin/templates",
     users: "/admin/users",
     subscriptions: "/admin/subscriptions",

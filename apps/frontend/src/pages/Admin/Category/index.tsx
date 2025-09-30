@@ -11,7 +11,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { CATEGORY_API } from "@/api/category";
+import { useQuery } from "@tanstack/react-query";
+
 export default function Category() {
+  const { data: categories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: () => CATEGORY_API.getCategories(),
+  });
+  console.log(categories);
   return (
     <div className="flex flex-col gap-4 space-y-4">
       <Button asChild className="w-fit">
@@ -24,17 +32,33 @@ export default function Category() {
           <TableRow>
             <TableHead>Name</TableHead>
             <TableHead>Description</TableHead>
-            <TableHead>Status</TableHead>
             <TableHead>Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Description</TableCell>
-            <TableCell>Status</TableCell>
-            <TableCell>Action</TableCell>
-          </TableRow>
+          {categories?.map((category) => (
+            <TableRow key={category.id}>
+              <TableCell>{category.name}</TableCell>
+              <TableCell>{category.description}</TableCell>
+              <TableCell>
+                <div className="flex gap-2">
+                  <Button variant="outline" className="w-fit" asChild>
+                    <Link
+                      to={`${ROUTE_PATH.adminDashboard.categoryEdit.replace(
+                        ":id",
+                        category.id
+                      )}`}
+                    >
+                      Edit
+                    </Link>
+                  </Button>
+                  <Button variant="destructive" className="w-fit">
+                    Delete
+                  </Button>
+                </div>
+              </TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </div>

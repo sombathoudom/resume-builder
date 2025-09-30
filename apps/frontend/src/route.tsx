@@ -3,6 +3,7 @@ import AdminDashboard from "@/pages/Admin/Dashboard";
 import { ROUTE_PATH } from "@/lib/route-path";
 import Categories from "@/pages/Admin/Category";
 import CreateCategoryPage from "./pages/Admin/Category/Create";
+import EditCategoryPage from "./pages/Admin/Category/Edit";
 export const UserRoutes = [
   {
     path: "/dashboard",
@@ -25,6 +26,11 @@ export const SuperAdminRoutes = [
   {
     path: "/categories/add",
     ele: <CreateCategoryPage />,
+    role: "admin",
+  },
+  {
+    path: "/categories/:id/edit",
+    ele: <EditCategoryPage />,
     role: "admin",
   },
   // {

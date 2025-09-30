@@ -6,6 +6,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
+import { CATEGORY_API } from "@/api/category";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
   description: z.string().min(1, "Description is required"),
@@ -19,8 +22,21 @@ export default function CreateCategoryPage() {
   } = useForm({
     resolver: zodResolver(schema),
   });
+
+  const createCategoryMutation = useMutation({
+    mutationFn: async (data: z.infer<typeof schema>) => {
+      return await CATEGORY_API.createCategory(data);
+    },
+    onSuccess: () => {
+      console.log("Category created successfully");
+    },
+    onError: () => {
+      console.log("Category creation failed");
+    },
+  });
+
   const onSubmit = (data: z.infer<typeof schema>) => {
-    console.log(data);
+    createCategoryMutation.mutate(data);
   };
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
