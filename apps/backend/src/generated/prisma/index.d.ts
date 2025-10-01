@@ -67,6 +67,15 @@ export const EnumSubscriptionStatus: {
 
 export type EnumSubscriptionStatus = (typeof EnumSubscriptionStatus)[keyof typeof EnumSubscriptionStatus]
 
+
+export const EnumCVStatus: {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED',
+  ARCHIVED: 'ARCHIVED'
+};
+
+export type EnumCVStatus = (typeof EnumCVStatus)[keyof typeof EnumCVStatus]
+
 }
 
 export type EnumRole = $Enums.EnumRole
@@ -80,6 +89,10 @@ export const EnumSubscriptionPlan: typeof $Enums.EnumSubscriptionPlan
 export type EnumSubscriptionStatus = $Enums.EnumSubscriptionStatus
 
 export const EnumSubscriptionStatus: typeof $Enums.EnumSubscriptionStatus
+
+export type EnumCVStatus = $Enums.EnumCVStatus
+
+export const EnumCVStatus: typeof $Enums.EnumCVStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -1302,6 +1315,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type TemplateCountOutputType
+   */
+
+  export type TemplateCountOutputType = {
+    cvs: number
+  }
+
+  export type TemplateCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cvs?: boolean | TemplateCountOutputTypeCountCvsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TemplateCountOutputType without action
+   */
+  export type TemplateCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TemplateCountOutputType
+     */
+    select?: TemplateCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TemplateCountOutputType without action
+   */
+  export type TemplateCountOutputTypeCountCvsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CVWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -2469,25 +2513,34 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     templateId: string | null
+    title: string | null
     pdf_url: string | null
+    status: $Enums.EnumCVStatus | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type CVMaxAggregateOutputType = {
     id: string | null
     userId: string | null
     templateId: string | null
+    title: string | null
     pdf_url: string | null
+    status: $Enums.EnumCVStatus | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type CVCountAggregateOutputType = {
     id: number
     userId: number
     templateId: number
+    title: number
     data_json: number
     pdf_url: number
+    status: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -2496,25 +2549,34 @@ export namespace Prisma {
     id?: true
     userId?: true
     templateId?: true
+    title?: true
     pdf_url?: true
+    status?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type CVMaxAggregateInputType = {
     id?: true
     userId?: true
     templateId?: true
+    title?: true
     pdf_url?: true
+    status?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type CVCountAggregateInputType = {
     id?: true
     userId?: true
     templateId?: true
+    title?: true
     data_json?: true
     pdf_url?: true
+    status?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -2594,9 +2656,12 @@ export namespace Prisma {
     id: string
     userId: string
     templateId: string
+    title: string
     data_json: JsonValue
     pdf_url: string
+    status: $Enums.EnumCVStatus
     createdAt: Date
+    updatedAt: Date
     _count: CVCountAggregateOutputType | null
     _min: CVMinAggregateOutputType | null
     _max: CVMaxAggregateOutputType | null
@@ -2620,64 +2685,86 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     templateId?: boolean
+    title?: boolean
     data_json?: boolean
     pdf_url?: boolean
+    status?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    template?: boolean | TemplateDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["cV"]>
 
   export type CVSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
     templateId?: boolean
+    title?: boolean
     data_json?: boolean
     pdf_url?: boolean
+    status?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    template?: boolean | TemplateDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["cV"]>
 
   export type CVSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
     templateId?: boolean
+    title?: boolean
     data_json?: boolean
     pdf_url?: boolean
+    status?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    template?: boolean | TemplateDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["cV"]>
 
   export type CVSelectScalar = {
     id?: boolean
     userId?: boolean
     templateId?: boolean
+    title?: boolean
     data_json?: boolean
     pdf_url?: boolean
+    status?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type CVOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "templateId" | "data_json" | "pdf_url" | "createdAt", ExtArgs["result"]["cV"]>
+  export type CVOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "templateId" | "title" | "data_json" | "pdf_url" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["cV"]>
   export type CVInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    template?: boolean | TemplateDefaultArgs<ExtArgs>
   }
   export type CVIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    template?: boolean | TemplateDefaultArgs<ExtArgs>
   }
   export type CVIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    template?: boolean | TemplateDefaultArgs<ExtArgs>
   }
 
   export type $CVPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "CV"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      template: Prisma.$TemplatePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
       templateId: string
+      title: string
       data_json: Prisma.JsonValue
       pdf_url: string
+      status: $Enums.EnumCVStatus
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["cV"]>
     composites: {}
   }
@@ -3073,6 +3160,7 @@ export namespace Prisma {
   export interface Prisma__CVClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    template<T extends TemplateDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TemplateDefaultArgs<ExtArgs>>): Prisma__TemplateClient<$Result.GetResult<Prisma.$TemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3105,9 +3193,12 @@ export namespace Prisma {
     readonly id: FieldRef<"CV", 'String'>
     readonly userId: FieldRef<"CV", 'String'>
     readonly templateId: FieldRef<"CV", 'String'>
+    readonly title: FieldRef<"CV", 'String'>
     readonly data_json: FieldRef<"CV", 'Json'>
     readonly pdf_url: FieldRef<"CV", 'String'>
+    readonly status: FieldRef<"CV", 'EnumCVStatus'>
     readonly createdAt: FieldRef<"CV", 'DateTime'>
+    readonly updatedAt: FieldRef<"CV", 'DateTime'>
   }
     
 
@@ -3538,8 +3629,10 @@ export namespace Prisma {
     description: string | null
     preview_url: string | null
     file_path: string | null
+    component_name: string | null
     is_active: boolean | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type TemplateMaxAggregateOutputType = {
@@ -3548,8 +3641,10 @@ export namespace Prisma {
     description: string | null
     preview_url: string | null
     file_path: string | null
+    component_name: string | null
     is_active: boolean | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type TemplateCountAggregateOutputType = {
@@ -3558,8 +3653,10 @@ export namespace Prisma {
     description: number
     preview_url: number
     file_path: number
+    component_name: number
     is_active: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -3570,8 +3667,10 @@ export namespace Prisma {
     description?: true
     preview_url?: true
     file_path?: true
+    component_name?: true
     is_active?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type TemplateMaxAggregateInputType = {
@@ -3580,8 +3679,10 @@ export namespace Prisma {
     description?: true
     preview_url?: true
     file_path?: true
+    component_name?: true
     is_active?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type TemplateCountAggregateInputType = {
@@ -3590,8 +3691,10 @@ export namespace Prisma {
     description?: true
     preview_url?: true
     file_path?: true
+    component_name?: true
     is_active?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -3673,8 +3776,10 @@ export namespace Prisma {
     description: string
     preview_url: string
     file_path: string
+    component_name: string
     is_active: boolean
     createdAt: Date
+    updatedAt: Date
     _count: TemplateCountAggregateOutputType | null
     _min: TemplateMinAggregateOutputType | null
     _max: TemplateMaxAggregateOutputType | null
@@ -3700,8 +3805,12 @@ export namespace Prisma {
     description?: boolean
     preview_url?: boolean
     file_path?: boolean
+    component_name?: boolean
     is_active?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
+    cvs?: boolean | Template$cvsArgs<ExtArgs>
+    _count?: boolean | TemplateCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["template"]>
 
   export type TemplateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3710,8 +3819,10 @@ export namespace Prisma {
     description?: boolean
     preview_url?: boolean
     file_path?: boolean
+    component_name?: boolean
     is_active?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["template"]>
 
   export type TemplateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3720,8 +3831,10 @@ export namespace Prisma {
     description?: boolean
     preview_url?: boolean
     file_path?: boolean
+    component_name?: boolean
     is_active?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["template"]>
 
   export type TemplateSelectScalar = {
@@ -3730,23 +3843,35 @@ export namespace Prisma {
     description?: boolean
     preview_url?: boolean
     file_path?: boolean
+    component_name?: boolean
     is_active?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type TemplateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "preview_url" | "file_path" | "is_active" | "createdAt", ExtArgs["result"]["template"]>
+  export type TemplateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "preview_url" | "file_path" | "component_name" | "is_active" | "createdAt" | "updatedAt", ExtArgs["result"]["template"]>
+  export type TemplateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cvs?: boolean | Template$cvsArgs<ExtArgs>
+    _count?: boolean | TemplateCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type TemplateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type TemplateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $TemplatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Template"
-    objects: {}
+    objects: {
+      cvs: Prisma.$CVPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
       description: string
       preview_url: string
       file_path: string
+      component_name: string
       is_active: boolean
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["template"]>
     composites: {}
   }
@@ -4141,6 +4266,7 @@ export namespace Prisma {
    */
   export interface Prisma__TemplateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    cvs<T extends Template$cvsArgs<ExtArgs> = {}>(args?: Subset<T, Template$cvsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CVPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4175,8 +4301,10 @@ export namespace Prisma {
     readonly description: FieldRef<"Template", 'String'>
     readonly preview_url: FieldRef<"Template", 'String'>
     readonly file_path: FieldRef<"Template", 'String'>
+    readonly component_name: FieldRef<"Template", 'String'>
     readonly is_active: FieldRef<"Template", 'Boolean'>
     readonly createdAt: FieldRef<"Template", 'DateTime'>
+    readonly updatedAt: FieldRef<"Template", 'DateTime'>
   }
     
 
@@ -4193,6 +4321,10 @@ export namespace Prisma {
      * Omit specific fields from the Template
      */
     omit?: TemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemplateInclude<ExtArgs> | null
     /**
      * Filter, which Template to fetch.
      */
@@ -4212,6 +4344,10 @@ export namespace Prisma {
      */
     omit?: TemplateOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemplateInclude<ExtArgs> | null
+    /**
      * Filter, which Template to fetch.
      */
     where: TemplateWhereUniqueInput
@@ -4229,6 +4365,10 @@ export namespace Prisma {
      * Omit specific fields from the Template
      */
     omit?: TemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemplateInclude<ExtArgs> | null
     /**
      * Filter, which Template to fetch.
      */
@@ -4278,6 +4418,10 @@ export namespace Prisma {
      */
     omit?: TemplateOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemplateInclude<ExtArgs> | null
+    /**
      * Filter, which Template to fetch.
      */
     where?: TemplateWhereInput
@@ -4326,6 +4470,10 @@ export namespace Prisma {
      */
     omit?: TemplateOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemplateInclude<ExtArgs> | null
+    /**
      * Filter, which Templates to fetch.
      */
     where?: TemplateWhereInput
@@ -4368,6 +4516,10 @@ export namespace Prisma {
      * Omit specific fields from the Template
      */
     omit?: TemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemplateInclude<ExtArgs> | null
     /**
      * The data needed to create a Template.
      */
@@ -4416,6 +4568,10 @@ export namespace Prisma {
      * Omit specific fields from the Template
      */
     omit?: TemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemplateInclude<ExtArgs> | null
     /**
      * The data needed to update a Template.
      */
@@ -4483,6 +4639,10 @@ export namespace Prisma {
      */
     omit?: TemplateOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemplateInclude<ExtArgs> | null
+    /**
      * The filter to search for the Template to update in case it exists.
      */
     where: TemplateWhereUniqueInput
@@ -4509,6 +4669,10 @@ export namespace Prisma {
      */
     omit?: TemplateOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemplateInclude<ExtArgs> | null
+    /**
      * Filter which Template to delete.
      */
     where: TemplateWhereUniqueInput
@@ -4529,6 +4693,30 @@ export namespace Prisma {
   }
 
   /**
+   * Template.cvs
+   */
+  export type Template$cvsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CV
+     */
+    select?: CVSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CV
+     */
+    omit?: CVOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CVInclude<ExtArgs> | null
+    where?: CVWhereInput
+    orderBy?: CVOrderByWithRelationInput | CVOrderByWithRelationInput[]
+    cursor?: CVWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CVScalarFieldEnum | CVScalarFieldEnum[]
+  }
+
+  /**
    * Template without action
    */
   export type TemplateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4540,6 +4728,10 @@ export namespace Prisma {
      * Omit specific fields from the Template
      */
     omit?: TemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemplateInclude<ExtArgs> | null
   }
 
 
@@ -6668,9 +6860,12 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     templateId: 'templateId',
+    title: 'title',
     data_json: 'data_json',
     pdf_url: 'pdf_url',
-    createdAt: 'createdAt'
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type CVScalarFieldEnum = (typeof CVScalarFieldEnum)[keyof typeof CVScalarFieldEnum]
@@ -6682,8 +6877,10 @@ export namespace Prisma {
     description: 'description',
     preview_url: 'preview_url',
     file_path: 'file_path',
+    component_name: 'component_name',
     is_active: 'is_active',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type TemplateScalarFieldEnum = (typeof TemplateScalarFieldEnum)[keyof typeof TemplateScalarFieldEnum]
@@ -6822,6 +7019,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'EnumCVStatus'
+   */
+  export type EnumEnumCVStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EnumCVStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'EnumCVStatus[]'
+   */
+  export type ListEnumEnumCVStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EnumCVStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -6944,20 +7155,28 @@ export namespace Prisma {
     id?: StringFilter<"CV"> | string
     userId?: StringFilter<"CV"> | string
     templateId?: StringFilter<"CV"> | string
+    title?: StringFilter<"CV"> | string
     data_json?: JsonFilter<"CV">
     pdf_url?: StringFilter<"CV"> | string
+    status?: EnumEnumCVStatusFilter<"CV"> | $Enums.EnumCVStatus
     createdAt?: DateTimeFilter<"CV"> | Date | string
+    updatedAt?: DateTimeFilter<"CV"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    template?: XOR<TemplateScalarRelationFilter, TemplateWhereInput>
   }
 
   export type CVOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
     templateId?: SortOrder
+    title?: SortOrder
     data_json?: SortOrder
     pdf_url?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
+    template?: TemplateOrderByWithRelationInput
   }
 
   export type CVWhereUniqueInput = Prisma.AtLeast<{
@@ -6967,19 +7186,26 @@ export namespace Prisma {
     NOT?: CVWhereInput | CVWhereInput[]
     userId?: StringFilter<"CV"> | string
     templateId?: StringFilter<"CV"> | string
+    title?: StringFilter<"CV"> | string
     data_json?: JsonFilter<"CV">
     pdf_url?: StringFilter<"CV"> | string
+    status?: EnumEnumCVStatusFilter<"CV"> | $Enums.EnumCVStatus
     createdAt?: DateTimeFilter<"CV"> | Date | string
+    updatedAt?: DateTimeFilter<"CV"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    template?: XOR<TemplateScalarRelationFilter, TemplateWhereInput>
   }, "id">
 
   export type CVOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
     templateId?: SortOrder
+    title?: SortOrder
     data_json?: SortOrder
     pdf_url?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: CVCountOrderByAggregateInput
     _max?: CVMaxOrderByAggregateInput
     _min?: CVMinOrderByAggregateInput
@@ -6992,9 +7218,12 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"CV"> | string
     userId?: StringWithAggregatesFilter<"CV"> | string
     templateId?: StringWithAggregatesFilter<"CV"> | string
+    title?: StringWithAggregatesFilter<"CV"> | string
     data_json?: JsonWithAggregatesFilter<"CV">
     pdf_url?: StringWithAggregatesFilter<"CV"> | string
+    status?: EnumEnumCVStatusWithAggregatesFilter<"CV"> | $Enums.EnumCVStatus
     createdAt?: DateTimeWithAggregatesFilter<"CV"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"CV"> | Date | string
   }
 
   export type TemplateWhereInput = {
@@ -7006,8 +7235,11 @@ export namespace Prisma {
     description?: StringFilter<"Template"> | string
     preview_url?: StringFilter<"Template"> | string
     file_path?: StringFilter<"Template"> | string
+    component_name?: StringFilter<"Template"> | string
     is_active?: BoolFilter<"Template"> | boolean
     createdAt?: DateTimeFilter<"Template"> | Date | string
+    updatedAt?: DateTimeFilter<"Template"> | Date | string
+    cvs?: CVListRelationFilter
   }
 
   export type TemplateOrderByWithRelationInput = {
@@ -7016,12 +7248,16 @@ export namespace Prisma {
     description?: SortOrder
     preview_url?: SortOrder
     file_path?: SortOrder
+    component_name?: SortOrder
     is_active?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
+    cvs?: CVOrderByRelationAggregateInput
   }
 
   export type TemplateWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    component_name?: string
     AND?: TemplateWhereInput | TemplateWhereInput[]
     OR?: TemplateWhereInput[]
     NOT?: TemplateWhereInput | TemplateWhereInput[]
@@ -7031,7 +7267,9 @@ export namespace Prisma {
     file_path?: StringFilter<"Template"> | string
     is_active?: BoolFilter<"Template"> | boolean
     createdAt?: DateTimeFilter<"Template"> | Date | string
-  }, "id">
+    updatedAt?: DateTimeFilter<"Template"> | Date | string
+    cvs?: CVListRelationFilter
+  }, "id" | "component_name">
 
   export type TemplateOrderByWithAggregationInput = {
     id?: SortOrder
@@ -7039,8 +7277,10 @@ export namespace Prisma {
     description?: SortOrder
     preview_url?: SortOrder
     file_path?: SortOrder
+    component_name?: SortOrder
     is_active?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: TemplateCountOrderByAggregateInput
     _max?: TemplateMaxOrderByAggregateInput
     _min?: TemplateMinOrderByAggregateInput
@@ -7055,8 +7295,10 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"Template"> | string
     preview_url?: StringWithAggregatesFilter<"Template"> | string
     file_path?: StringWithAggregatesFilter<"Template"> | string
+    component_name?: StringWithAggregatesFilter<"Template"> | string
     is_active?: BoolWithAggregatesFilter<"Template"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Template"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Template"> | Date | string
   }
 
   export type SubscriptionWhereInput = {
@@ -7275,64 +7517,84 @@ export namespace Prisma {
 
   export type CVCreateInput = {
     id?: string
-    templateId: string
+    title?: string
     data_json: JsonNullValueInput | InputJsonValue
     pdf_url?: string
+    status?: $Enums.EnumCVStatus
     createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutCvsInput
+    template: TemplateCreateNestedOneWithoutCvsInput
   }
 
   export type CVUncheckedCreateInput = {
     id?: string
     userId: string
     templateId: string
+    title?: string
     data_json: JsonNullValueInput | InputJsonValue
     pdf_url?: string
+    status?: $Enums.EnumCVStatus
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CVUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    templateId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     data_json?: JsonNullValueInput | InputJsonValue
     pdf_url?: StringFieldUpdateOperationsInput | string
+    status?: EnumEnumCVStatusFieldUpdateOperationsInput | $Enums.EnumCVStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutCvsNestedInput
+    template?: TemplateUpdateOneRequiredWithoutCvsNestedInput
   }
 
   export type CVUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     templateId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     data_json?: JsonNullValueInput | InputJsonValue
     pdf_url?: StringFieldUpdateOperationsInput | string
+    status?: EnumEnumCVStatusFieldUpdateOperationsInput | $Enums.EnumCVStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CVCreateManyInput = {
     id?: string
     userId: string
     templateId: string
+    title?: string
     data_json: JsonNullValueInput | InputJsonValue
     pdf_url?: string
+    status?: $Enums.EnumCVStatus
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CVUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    templateId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     data_json?: JsonNullValueInput | InputJsonValue
     pdf_url?: StringFieldUpdateOperationsInput | string
+    status?: EnumEnumCVStatusFieldUpdateOperationsInput | $Enums.EnumCVStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CVUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     templateId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     data_json?: JsonNullValueInput | InputJsonValue
     pdf_url?: StringFieldUpdateOperationsInput | string
+    status?: EnumEnumCVStatusFieldUpdateOperationsInput | $Enums.EnumCVStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TemplateCreateInput = {
@@ -7341,8 +7603,11 @@ export namespace Prisma {
     description: string
     preview_url: string
     file_path: string
+    component_name: string
     is_active?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
+    cvs?: CVCreateNestedManyWithoutTemplateInput
   }
 
   export type TemplateUncheckedCreateInput = {
@@ -7351,8 +7616,11 @@ export namespace Prisma {
     description: string
     preview_url: string
     file_path: string
+    component_name: string
     is_active?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
+    cvs?: CVUncheckedCreateNestedManyWithoutTemplateInput
   }
 
   export type TemplateUpdateInput = {
@@ -7361,8 +7629,11 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     preview_url?: StringFieldUpdateOperationsInput | string
     file_path?: StringFieldUpdateOperationsInput | string
+    component_name?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cvs?: CVUpdateManyWithoutTemplateNestedInput
   }
 
   export type TemplateUncheckedUpdateInput = {
@@ -7371,8 +7642,11 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     preview_url?: StringFieldUpdateOperationsInput | string
     file_path?: StringFieldUpdateOperationsInput | string
+    component_name?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cvs?: CVUncheckedUpdateManyWithoutTemplateNestedInput
   }
 
   export type TemplateCreateManyInput = {
@@ -7381,8 +7655,10 @@ export namespace Prisma {
     description: string
     preview_url: string
     file_path: string
+    component_name: string
     is_active?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type TemplateUpdateManyMutationInput = {
@@ -7391,8 +7667,10 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     preview_url?: StringFieldUpdateOperationsInput | string
     file_path?: StringFieldUpdateOperationsInput | string
+    component_name?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TemplateUncheckedUpdateManyInput = {
@@ -7401,8 +7679,10 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     preview_url?: StringFieldUpdateOperationsInput | string
     file_path?: StringFieldUpdateOperationsInput | string
+    component_name?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SubscriptionCreateInput = {
@@ -7708,34 +7988,55 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type EnumEnumCVStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.EnumCVStatus | EnumEnumCVStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EnumCVStatus[] | ListEnumEnumCVStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EnumCVStatus[] | ListEnumEnumCVStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEnumCVStatusFilter<$PrismaModel> | $Enums.EnumCVStatus
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
+  }
+
+  export type TemplateScalarRelationFilter = {
+    is?: TemplateWhereInput
+    isNot?: TemplateWhereInput
   }
 
   export type CVCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     templateId?: SortOrder
+    title?: SortOrder
     data_json?: SortOrder
     pdf_url?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type CVMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     templateId?: SortOrder
+    title?: SortOrder
     pdf_url?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type CVMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     templateId?: SortOrder
+    title?: SortOrder
     pdf_url?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
   export type JsonWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -7764,6 +8065,16 @@ export namespace Prisma {
     _max?: NestedJsonFilter<$PrismaModel>
   }
 
+  export type EnumEnumCVStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EnumCVStatus | EnumEnumCVStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EnumCVStatus[] | ListEnumEnumCVStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EnumCVStatus[] | ListEnumEnumCVStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEnumCVStatusWithAggregatesFilter<$PrismaModel> | $Enums.EnumCVStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEnumCVStatusFilter<$PrismaModel>
+    _max?: NestedEnumEnumCVStatusFilter<$PrismaModel>
+  }
+
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -7775,8 +8086,10 @@ export namespace Prisma {
     description?: SortOrder
     preview_url?: SortOrder
     file_path?: SortOrder
+    component_name?: SortOrder
     is_active?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type TemplateMaxOrderByAggregateInput = {
@@ -7785,8 +8098,10 @@ export namespace Prisma {
     description?: SortOrder
     preview_url?: SortOrder
     file_path?: SortOrder
+    component_name?: SortOrder
     is_active?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type TemplateMinOrderByAggregateInput = {
@@ -7795,8 +8110,10 @@ export namespace Prisma {
     description?: SortOrder
     preview_url?: SortOrder
     file_path?: SortOrder
+    component_name?: SortOrder
     is_active?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -7987,6 +8304,16 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type TemplateCreateNestedOneWithoutCvsInput = {
+    create?: XOR<TemplateCreateWithoutCvsInput, TemplateUncheckedCreateWithoutCvsInput>
+    connectOrCreate?: TemplateCreateOrConnectWithoutCvsInput
+    connect?: TemplateWhereUniqueInput
+  }
+
+  export type EnumEnumCVStatusFieldUpdateOperationsInput = {
+    set?: $Enums.EnumCVStatus
+  }
+
   export type UserUpdateOneRequiredWithoutCvsNestedInput = {
     create?: XOR<UserCreateWithoutCvsInput, UserUncheckedCreateWithoutCvsInput>
     connectOrCreate?: UserCreateOrConnectWithoutCvsInput
@@ -7995,8 +8322,58 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCvsInput, UserUpdateWithoutCvsInput>, UserUncheckedUpdateWithoutCvsInput>
   }
 
+  export type TemplateUpdateOneRequiredWithoutCvsNestedInput = {
+    create?: XOR<TemplateCreateWithoutCvsInput, TemplateUncheckedCreateWithoutCvsInput>
+    connectOrCreate?: TemplateCreateOrConnectWithoutCvsInput
+    upsert?: TemplateUpsertWithoutCvsInput
+    connect?: TemplateWhereUniqueInput
+    update?: XOR<XOR<TemplateUpdateToOneWithWhereWithoutCvsInput, TemplateUpdateWithoutCvsInput>, TemplateUncheckedUpdateWithoutCvsInput>
+  }
+
+  export type CVCreateNestedManyWithoutTemplateInput = {
+    create?: XOR<CVCreateWithoutTemplateInput, CVUncheckedCreateWithoutTemplateInput> | CVCreateWithoutTemplateInput[] | CVUncheckedCreateWithoutTemplateInput[]
+    connectOrCreate?: CVCreateOrConnectWithoutTemplateInput | CVCreateOrConnectWithoutTemplateInput[]
+    createMany?: CVCreateManyTemplateInputEnvelope
+    connect?: CVWhereUniqueInput | CVWhereUniqueInput[]
+  }
+
+  export type CVUncheckedCreateNestedManyWithoutTemplateInput = {
+    create?: XOR<CVCreateWithoutTemplateInput, CVUncheckedCreateWithoutTemplateInput> | CVCreateWithoutTemplateInput[] | CVUncheckedCreateWithoutTemplateInput[]
+    connectOrCreate?: CVCreateOrConnectWithoutTemplateInput | CVCreateOrConnectWithoutTemplateInput[]
+    createMany?: CVCreateManyTemplateInputEnvelope
+    connect?: CVWhereUniqueInput | CVWhereUniqueInput[]
+  }
+
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type CVUpdateManyWithoutTemplateNestedInput = {
+    create?: XOR<CVCreateWithoutTemplateInput, CVUncheckedCreateWithoutTemplateInput> | CVCreateWithoutTemplateInput[] | CVUncheckedCreateWithoutTemplateInput[]
+    connectOrCreate?: CVCreateOrConnectWithoutTemplateInput | CVCreateOrConnectWithoutTemplateInput[]
+    upsert?: CVUpsertWithWhereUniqueWithoutTemplateInput | CVUpsertWithWhereUniqueWithoutTemplateInput[]
+    createMany?: CVCreateManyTemplateInputEnvelope
+    set?: CVWhereUniqueInput | CVWhereUniqueInput[]
+    disconnect?: CVWhereUniqueInput | CVWhereUniqueInput[]
+    delete?: CVWhereUniqueInput | CVWhereUniqueInput[]
+    connect?: CVWhereUniqueInput | CVWhereUniqueInput[]
+    update?: CVUpdateWithWhereUniqueWithoutTemplateInput | CVUpdateWithWhereUniqueWithoutTemplateInput[]
+    updateMany?: CVUpdateManyWithWhereWithoutTemplateInput | CVUpdateManyWithWhereWithoutTemplateInput[]
+    deleteMany?: CVScalarWhereInput | CVScalarWhereInput[]
+  }
+
+  export type CVUncheckedUpdateManyWithoutTemplateNestedInput = {
+    create?: XOR<CVCreateWithoutTemplateInput, CVUncheckedCreateWithoutTemplateInput> | CVCreateWithoutTemplateInput[] | CVUncheckedCreateWithoutTemplateInput[]
+    connectOrCreate?: CVCreateOrConnectWithoutTemplateInput | CVCreateOrConnectWithoutTemplateInput[]
+    upsert?: CVUpsertWithWhereUniqueWithoutTemplateInput | CVUpsertWithWhereUniqueWithoutTemplateInput[]
+    createMany?: CVCreateManyTemplateInputEnvelope
+    set?: CVWhereUniqueInput | CVWhereUniqueInput[]
+    disconnect?: CVWhereUniqueInput | CVWhereUniqueInput[]
+    delete?: CVWhereUniqueInput | CVWhereUniqueInput[]
+    connect?: CVWhereUniqueInput | CVWhereUniqueInput[]
+    update?: CVUpdateWithWhereUniqueWithoutTemplateInput | CVUpdateWithWhereUniqueWithoutTemplateInput[]
+    updateMany?: CVUpdateManyWithWhereWithoutTemplateInput | CVUpdateManyWithWhereWithoutTemplateInput[]
+    deleteMany?: CVScalarWhereInput | CVScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSubscriptionsInput = {
@@ -8117,6 +8494,13 @@ export namespace Prisma {
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
+
+  export type NestedEnumEnumCVStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.EnumCVStatus | EnumEnumCVStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EnumCVStatus[] | ListEnumEnumCVStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EnumCVStatus[] | ListEnumEnumCVStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEnumCVStatusFilter<$PrismaModel> | $Enums.EnumCVStatus
+  }
   export type NestedJsonFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
@@ -8139,6 +8523,16 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type NestedEnumEnumCVStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EnumCVStatus | EnumEnumCVStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EnumCVStatus[] | ListEnumEnumCVStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EnumCVStatus[] | ListEnumEnumCVStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEnumCVStatusWithAggregatesFilter<$PrismaModel> | $Enums.EnumCVStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEnumCVStatusFilter<$PrismaModel>
+    _max?: NestedEnumEnumCVStatusFilter<$PrismaModel>
   }
 
   export type NestedBoolFilter<$PrismaModel = never> = {
@@ -8173,18 +8567,24 @@ export namespace Prisma {
 
   export type CVCreateWithoutUserInput = {
     id?: string
-    templateId: string
+    title?: string
     data_json: JsonNullValueInput | InputJsonValue
     pdf_url?: string
+    status?: $Enums.EnumCVStatus
     createdAt?: Date | string
+    updatedAt?: Date | string
+    template: TemplateCreateNestedOneWithoutCvsInput
   }
 
   export type CVUncheckedCreateWithoutUserInput = {
     id?: string
     templateId: string
+    title?: string
     data_json: JsonNullValueInput | InputJsonValue
     pdf_url?: string
+    status?: $Enums.EnumCVStatus
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CVCreateOrConnectWithoutUserInput = {
@@ -8250,9 +8650,12 @@ export namespace Prisma {
     id?: StringFilter<"CV"> | string
     userId?: StringFilter<"CV"> | string
     templateId?: StringFilter<"CV"> | string
+    title?: StringFilter<"CV"> | string
     data_json?: JsonFilter<"CV">
     pdf_url?: StringFilter<"CV"> | string
+    status?: EnumEnumCVStatusFilter<"CV"> | $Enums.EnumCVStatus
     createdAt?: DateTimeFilter<"CV"> | Date | string
+    updatedAt?: DateTimeFilter<"CV"> | Date | string
   }
 
   export type SubscriptionUpsertWithWhereUniqueWithoutUserInput = {
@@ -8316,6 +8719,35 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutCvsInput, UserUncheckedCreateWithoutCvsInput>
   }
 
+  export type TemplateCreateWithoutCvsInput = {
+    id?: string
+    name: string
+    description: string
+    preview_url: string
+    file_path: string
+    component_name: string
+    is_active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TemplateUncheckedCreateWithoutCvsInput = {
+    id?: string
+    name: string
+    description: string
+    preview_url: string
+    file_path: string
+    component_name: string
+    is_active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TemplateCreateOrConnectWithoutCvsInput = {
+    where: TemplateWhereUniqueInput
+    create: XOR<TemplateCreateWithoutCvsInput, TemplateUncheckedCreateWithoutCvsInput>
+  }
+
   export type UserUpsertWithoutCvsInput = {
     update: XOR<UserUpdateWithoutCvsInput, UserUncheckedUpdateWithoutCvsInput>
     create: XOR<UserCreateWithoutCvsInput, UserUncheckedCreateWithoutCvsInput>
@@ -8351,6 +8783,89 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type TemplateUpsertWithoutCvsInput = {
+    update: XOR<TemplateUpdateWithoutCvsInput, TemplateUncheckedUpdateWithoutCvsInput>
+    create: XOR<TemplateCreateWithoutCvsInput, TemplateUncheckedCreateWithoutCvsInput>
+    where?: TemplateWhereInput
+  }
+
+  export type TemplateUpdateToOneWithWhereWithoutCvsInput = {
+    where?: TemplateWhereInput
+    data: XOR<TemplateUpdateWithoutCvsInput, TemplateUncheckedUpdateWithoutCvsInput>
+  }
+
+  export type TemplateUpdateWithoutCvsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    preview_url?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
+    component_name?: StringFieldUpdateOperationsInput | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TemplateUncheckedUpdateWithoutCvsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    preview_url?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
+    component_name?: StringFieldUpdateOperationsInput | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CVCreateWithoutTemplateInput = {
+    id?: string
+    title?: string
+    data_json: JsonNullValueInput | InputJsonValue
+    pdf_url?: string
+    status?: $Enums.EnumCVStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutCvsInput
+  }
+
+  export type CVUncheckedCreateWithoutTemplateInput = {
+    id?: string
+    userId: string
+    title?: string
+    data_json: JsonNullValueInput | InputJsonValue
+    pdf_url?: string
+    status?: $Enums.EnumCVStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CVCreateOrConnectWithoutTemplateInput = {
+    where: CVWhereUniqueInput
+    create: XOR<CVCreateWithoutTemplateInput, CVUncheckedCreateWithoutTemplateInput>
+  }
+
+  export type CVCreateManyTemplateInputEnvelope = {
+    data: CVCreateManyTemplateInput | CVCreateManyTemplateInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CVUpsertWithWhereUniqueWithoutTemplateInput = {
+    where: CVWhereUniqueInput
+    update: XOR<CVUpdateWithoutTemplateInput, CVUncheckedUpdateWithoutTemplateInput>
+    create: XOR<CVCreateWithoutTemplateInput, CVUncheckedCreateWithoutTemplateInput>
+  }
+
+  export type CVUpdateWithWhereUniqueWithoutTemplateInput = {
+    where: CVWhereUniqueInput
+    data: XOR<CVUpdateWithoutTemplateInput, CVUncheckedUpdateWithoutTemplateInput>
+  }
+
+  export type CVUpdateManyWithWhereWithoutTemplateInput = {
+    where: CVScalarWhereInput
+    data: XOR<CVUpdateManyMutationInput, CVUncheckedUpdateManyWithoutTemplateInput>
   }
 
   export type UserCreateWithoutSubscriptionsInput = {
@@ -8424,9 +8939,12 @@ export namespace Prisma {
   export type CVCreateManyUserInput = {
     id?: string
     templateId: string
+    title?: string
     data_json: JsonNullValueInput | InputJsonValue
     pdf_url?: string
+    status?: $Enums.EnumCVStatus
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type SubscriptionCreateManyUserInput = {
@@ -8441,26 +8959,35 @@ export namespace Prisma {
 
   export type CVUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    templateId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     data_json?: JsonNullValueInput | InputJsonValue
     pdf_url?: StringFieldUpdateOperationsInput | string
+    status?: EnumEnumCVStatusFieldUpdateOperationsInput | $Enums.EnumCVStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    template?: TemplateUpdateOneRequiredWithoutCvsNestedInput
   }
 
   export type CVUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     templateId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     data_json?: JsonNullValueInput | InputJsonValue
     pdf_url?: StringFieldUpdateOperationsInput | string
+    status?: EnumEnumCVStatusFieldUpdateOperationsInput | $Enums.EnumCVStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CVUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     templateId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     data_json?: JsonNullValueInput | InputJsonValue
     pdf_url?: StringFieldUpdateOperationsInput | string
+    status?: EnumEnumCVStatusFieldUpdateOperationsInput | $Enums.EnumCVStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SubscriptionUpdateWithoutUserInput = {
@@ -8489,6 +9016,50 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumEnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.EnumSubscriptionStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CVCreateManyTemplateInput = {
+    id?: string
+    userId: string
+    title?: string
+    data_json: JsonNullValueInput | InputJsonValue
+    pdf_url?: string
+    status?: $Enums.EnumCVStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CVUpdateWithoutTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    data_json?: JsonNullValueInput | InputJsonValue
+    pdf_url?: StringFieldUpdateOperationsInput | string
+    status?: EnumEnumCVStatusFieldUpdateOperationsInput | $Enums.EnumCVStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCvsNestedInput
+  }
+
+  export type CVUncheckedUpdateWithoutTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    data_json?: JsonNullValueInput | InputJsonValue
+    pdf_url?: StringFieldUpdateOperationsInput | string
+    status?: EnumEnumCVStatusFieldUpdateOperationsInput | $Enums.EnumCVStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CVUncheckedUpdateManyWithoutTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    data_json?: JsonNullValueInput | InputJsonValue
+    pdf_url?: StringFieldUpdateOperationsInput | string
+    status?: EnumEnumCVStatusFieldUpdateOperationsInput | $Enums.EnumCVStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

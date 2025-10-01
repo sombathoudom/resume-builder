@@ -136,9 +136,12 @@ exports.Prisma.CVScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   templateId: 'templateId',
+  title: 'title',
   data_json: 'data_json',
   pdf_url: 'pdf_url',
-  createdAt: 'createdAt'
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.TemplateScalarFieldEnum = {
@@ -147,8 +150,10 @@ exports.Prisma.TemplateScalarFieldEnum = {
   description: 'description',
   preview_url: 'preview_url',
   file_path: 'file_path',
+  component_name: 'component_name',
   is_active: 'is_active',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SubscriptionScalarFieldEnum = {
@@ -197,6 +202,12 @@ exports.EnumRole = exports.$Enums.EnumRole = {
 exports.EnumSubscriptionPlan = exports.$Enums.EnumSubscriptionPlan = {
   FREE: 'FREE',
   PRO: 'PRO'
+};
+
+exports.EnumCVStatus = exports.$Enums.EnumCVStatus = {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED',
+  ARCHIVED: 'ARCHIVED'
 };
 
 exports.EnumSubscriptionStatus = exports.$Enums.EnumSubscriptionStatus = {

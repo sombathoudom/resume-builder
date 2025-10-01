@@ -6,7 +6,7 @@ import rateLimit from "express-rate-limit";
 import morgan from "morgan";
 // import authRoutes from "./routes/auth.routes";
 // import cvRoutes from "./routes/cv.routes";
-// import templateRoutes from "./routes/template.routes";
+import templateRoutes from "./routes/template.routes";
 import { errorHandler } from "./middlewares/error.middleware";
 import categoryRoutes from "./routes/category.routes";
 const app = express();
@@ -28,7 +28,7 @@ app.use("/api/", apiLimiter);
 // Routes
 // app.use("/api/auth", authRoutes);
 // app.use("/api/cv", cvRoutes);
-// app.use("/api/templates", templateRoutes);
+app.use("/api/templates", templateRoutes);
 app.use("/api/category", categoryRoutes);
 // Error handler
 app.use(errorHandler);

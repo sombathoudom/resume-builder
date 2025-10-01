@@ -1,14 +1,18 @@
-// // apps/backend/src/routes/cv.routes.ts
 // import { Router } from "express";
-// import { createCV, getUserCVs } from "../controllers/cv.controller";
+// import { CVController } from "../controllers/cv.controller";
 // import { authMiddleware } from "../middlewares/auth.middleware";
 
 // const router = Router();
 
-// // Protect CV routes
+// // All CV routes require authentication
 // router.use(authMiddleware);
 
-// router.post("/", createCV);
-// router.get("/", getUserCVs);
+// // CV CRUD operations
+// router.get("/", CVController.getUserCVs);
+// router.get("/:id", CVController.getCVById);
+// router.post("/", CVController.createCV);
+// router.put("/:id", CVController.updateCV);
+// router.delete("/:id", CVController.deleteCV);
+// router.post("/:id/duplicate", CVController.duplicateCV);
 
 // export default router;

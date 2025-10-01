@@ -44,24 +44,37 @@ model User {
   subscriptions       Subscription[]
 }
 
+enum EnumCVStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
 model CV {
-  id         String   @id @default(cuid())
+  id         String       @id @default(cuid())
   userId     String
   templateId String
+  title      String       @default("My CV")
   data_json  Json
-  pdf_url    String   @default("")
-  createdAt  DateTime @default(now())
-  user       User     @relation(fields: [userId], references: [id])
+  pdf_url    String       @default("")
+  status     EnumCVStatus @default(DRAFT)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  user       User         @relation(fields: [userId], references: [id])
+  template   Template     @relation(fields: [templateId], references: [id])
 }
 
 model Template {
-  id          String   @id @default(cuid())
-  name        String
-  description String
-  preview_url String
-  file_path   String
-  is_active   Boolean  @default(true)
-  createdAt   DateTime @default(now())
+  id             String   @id @default(cuid())
+  name           String
+  description    String
+  preview_url    String
+  file_path      String
+  component_name String   @unique // e.g., "CvTempV1", "CvTempV2"
+  is_active      Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  cvs            CV[]
 }
 
 model Subscription {
