@@ -16,6 +16,25 @@ export const CATEGORY_API = {
     );
     return response;
   },
+  getCategoryById: async (id: string) => {
+    const response: ICategory.Root = await axiosInstance.get(
+      `${ROUTE_API.category.root}/${id}`
+    );
+    return response;
+  },
+  updateCategory: async (id: string, data: ICategory.CreateCategory) => {
+    const response: ICategory.Root = await axiosInstance.put(
+      `${ROUTE_API.category.root}/${id}`,
+      data
+    );
+    return response;
+  },
+  deleteCategory: async (id: string) => {
+    const response: ICategory.Root = await axiosInstance.delete(
+      `${ROUTE_API.category.root}/${id}`
+    );
+    return response;
+  },
 };
 
 // export const useGetCategories = () => {

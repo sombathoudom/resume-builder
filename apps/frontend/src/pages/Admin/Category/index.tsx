@@ -13,15 +13,39 @@ import {
 } from "@/components/ui/table";
 import { CATEGORY_API } from "@/api/category";
 import { useQuery } from "@tanstack/react-query";
+import DeleteConfirmation from "@/components/delete-confirmation";
+import { useDeleteConfirmation } from "@/hooks/use-delete-confirmation";
 
 export default function Category() {
-  const { data: categories } = useQuery({
+  const { data: categories, refetch } = useQuery({
     queryKey: ["categories"],
     queryFn: () => CATEGORY_API.getCategories(),
   });
-  console.log(categories);
+
+  const {
+    isOpen,
+    setIsOpen,
+    isLoading,
+    handleDeleteClick,
+    handleConfirmDelete,
+  } = useDeleteConfirmation({
+    deleteFn: CATEGORY_API.deleteCategory,
+    onSuccess: () => refetch(),
+    successMessage: "Category deleted successfully",
+    errorMessage: "Category deletion failed",
+  });
+
   return (
     <div className="flex flex-col gap-4 space-y-4">
+      <DeleteConfirmation
+        isOpen={isOpen}
+        setOpen={setIsOpen}
+        onConfirm={handleConfirmDelete}
+        title="Delete Category"
+        description="Are you sure you want to delete this category? This action cannot be undone."
+        confirmText="Delete"
+        isLoading={isLoading}
+      />
       <Button asChild className="w-fit">
         <Link to={ROUTE_PATH.adminDashboard.categoryAdd}>
           <Plus /> Add New Category
@@ -52,7 +76,11 @@ export default function Category() {
                       Edit
                     </Link>
                   </Button>
-                  <Button variant="destructive" className="w-fit">
+                  <Button
+                    variant="destructive"
+                    className="w-fit"
+                    onClick={() => handleDeleteClick(category.id)}
+                  >
                     Delete
                   </Button>
                 </div>

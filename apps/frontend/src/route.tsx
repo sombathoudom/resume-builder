@@ -30,7 +30,7 @@ export const SuperAdminRoutes = [
   },
   {
     path: "/categories/:id/edit",
-    ele: <EditCategoryPage />,
+    ele: <CreateCategoryPage />,
     role: "admin",
   },
   // {
